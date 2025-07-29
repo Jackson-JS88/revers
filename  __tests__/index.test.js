@@ -1,6 +1,15 @@
-import reverse from '../src/index.js'
+const fs = require('fs')
+const path = require('path')
+const reverse = require('../src/index.js')
+
+const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__' , filename)
+const readFixture = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8')
 
 test('reverse', () => {
-  expect(reverse('hello')).toEqual('olleh')
-  expect(reverse('')).toEqual('')
-})
+  const text = readFixture('input.txt')
+  const expected = readFixture('expected.txt')
+
+  expect(reverse(text)).toEqual(expected)
+});
+
+
